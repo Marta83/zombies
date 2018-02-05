@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901160504) do
+ActiveRecord::Schema.define(version: 20180205142958) do
 
   create_table "armors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string "name"
-    t.integer "defense_points"
-    t.integer "durability"
-    t.integer "price"
+    t.string "name", null: false
+    t.integer "defense_points", default: 0, null: false
+    t.integer "durability", default: 0, null: false
+    t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "weapons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string "name"
-    t.integer "attack_points"
-    t.integer "durability"
-    t.integer "price"
+    t.string "name", null: false
+    t.integer "attack_points", default: 0, null: false
+    t.integer "durability", default: 0, null: false
+    t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,11 +49,11 @@ ActiveRecord::Schema.define(version: 20170901160504) do
   end
 
   create_table "zombies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string "name"
-    t.integer "hit_points"
-    t.integer "brains_eaten"
-    t.integer "speed"
-    t.datetime "turn_date"
+    t.string "name", null: false
+    t.integer "hit_points", default: 0, null: false
+    t.integer "brains_eaten", default: 0, null: false
+    t.integer "speed", default: 0, null: false
+    t.datetime "turn_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
