@@ -9,6 +9,7 @@ services:
     environment:
       API_DB_HOST: mysql
       API_DB_NAME: coding-challenge-api
+      API_DB_DEV_NAME: coding-challenge-api-dev
       API_DB_TEST_NAME: coding-challenge-api-test
       API_DB_PASSWORD: M9S8TsR7z7SG6Y
     ports:
