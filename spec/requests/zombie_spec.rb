@@ -1,4 +1,4 @@
-RSpec.describe 'Todos API', type: :request do
+RSpec.describe 'Zombies API', type: :request do
 
   describe 'POST /zombie' do
     let(:valid_attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week  } }
@@ -6,7 +6,7 @@ RSpec.describe 'Todos API', type: :request do
     context 'when the request is valid' do
       before { post '/zombie', params: valid_attributes }
 
-      it 'creates a todo' do
+      it 'creates a zombie' do
         expect(json['name']).to eq('Zombie name')
       end
 
