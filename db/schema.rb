@@ -14,18 +14,18 @@ ActiveRecord::Schema.define(version: 20180205142958) do
 
   create_table "armors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
-    t.integer "defense_points", default: 0, null: false
-    t.integer "durability", default: 0, null: false
-    t.integer "price", default: 0, null: false
+    t.integer "defense_points", null: false
+    t.integer "durability", null: false
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "weapons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
-    t.integer "attack_points", default: 0, null: false
-    t.integer "durability", default: 0, null: false
-    t.integer "price", default: 0, null: false
+    t.integer "attack_points", null: false
+    t.integer "durability", null: false
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20180205142958) do
 
   create_table "zombies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
-    t.integer "hit_points", default: 0, null: false
+    t.integer "hit_points", default: 100, null: false
     t.integer "brains_eaten", default: 0, null: false
-    t.integer "speed", default: 0, null: false
+    t.integer "speed", default: 10, null: false
     t.datetime "turn_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
