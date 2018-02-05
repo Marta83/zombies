@@ -2,20 +2,27 @@ require 'rails_helper'
 
 RSpec.describe Zombie, type: :model do
   subject {
-      described_class.new(name: "Zombie name",
-                         turn_date: DateTime.now - 1.week) }
+    described_class.new(name: "Zombie name",
+                        turn_date: DateTime.now - 1.week) }
 
-  it "is valid with valid attributes" do
-    expect(subject).to be_valid
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(subject).to be_valid
+    end
+
+    it "is not valid without a name" do
+      subject.name = nil
+      expect(subject).to_not be_valid
+    end
+
+    it "is not valid without a turn_date" do
+      subject.turn_date = nil
+      expect(subject).to_not be_valid
+    end
   end
 
-  it "is not valid without a name" do
-    subject.name = nil
-    expect(subject).to_not be_valid
-  end
-
-  it "is not valid without a turn_date" do
-    subject.turn_date = nil
-    expect(subject).to_not be_valid
+  describe "Associations" do
+    it { should have_one(:armor) }
+    it { should have_one(:weapon) }
   end
 end
