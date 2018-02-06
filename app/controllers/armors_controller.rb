@@ -1,4 +1,4 @@
-class ArmorController < ApplicationController
+class ArmorsController < ApplicationController
 
   def create
     @armor = Armor.create!(todo_params)

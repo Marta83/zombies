@@ -1,13 +1,13 @@
 RSpec.describe 'Armors API', type: :request do
 
-  describe 'POST /armor' do
+  describe 'POST /armors' do
     let(:valid_attributes) { { name: 'Armor name',
                                price: 50,
                                defense_points: 50,
                                durability: 50} }
 
     context 'when the request is valid' do
-      before { post '/armor', params: valid_attributes }
+      before { post '/armors', params: valid_attributes }
 
       it 'creates a armor' do
         expect(json['name']).to eq('Armor name')
@@ -19,7 +19,7 @@ RSpec.describe 'Armors API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/armor', params: { name: 'Armor name' } }
+      before { post '/armors', params: { name: 'Armor name' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)

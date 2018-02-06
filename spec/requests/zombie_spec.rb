@@ -1,10 +1,10 @@
 RSpec.describe 'Zombies API', type: :request do
 
-  describe 'POST /zombie' do
+  describe 'POST /zombies' do
     let(:valid_attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week  } }
 
     context 'when the request is valid' do
-      before { post '/zombie', params: valid_attributes }
+      before { post '/zombies', params: valid_attributes }
 
       it 'creates a zombie' do
         expect(json['name']).to eq('Zombie name')
@@ -16,7 +16,7 @@ RSpec.describe 'Zombies API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/zombie', params: { name: 'Zombie name' } }
+      before { post '/zombies', params: { name: 'Zombie name' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)

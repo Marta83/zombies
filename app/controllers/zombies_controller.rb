@@ -1,11 +1,11 @@
-class ZombieController < ApplicationController
+class ZombiesController < ApplicationController
 
   def create
-    @zombie = Zombie.create!(todo_params)
+    @zombie = Zombie.create!(zombie_params)
     json_response(@zombie, :created)
   end
 
-  def todo_params
+  def zombie_params
     params.permit(:name, :turn_date, :hit_points, :brains_eaten, :turn_date)
   end
 

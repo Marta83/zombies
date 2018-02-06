@@ -22,7 +22,9 @@ RSpec.describe Zombie, type: :model do
   end
 
   describe "Associations" do
+    it { should have_many(:zombie_armors) }
     it { should have_many(:armors) }
     it { should have_many(:weapons) }
   end
+
 end
