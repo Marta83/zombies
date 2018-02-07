@@ -4,7 +4,8 @@ RSpec.describe 'Create use case' do
   let(:callback) { lambda do |entity| return entity end}
 
   describe 'Create a zombie' do
-    let(:repository){ZombieRepository.new}
+    let(:repository){Repository.for(:zombie)
+}
 
     context "Valid attributes" do
       let(:attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week  } }

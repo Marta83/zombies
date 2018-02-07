@@ -13,6 +13,6 @@ class ZombiesController < ApplicationController
   end
 
   def repo
-    @repo ||= ZombieRepository.new
+    @repo ||= Repository.for(:zombie)
   end
 end
