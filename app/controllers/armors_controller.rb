@@ -1,12 +1,18 @@
 class ArmorsController < ApplicationController
 
   def create
-    @armor = Armor.create!(todo_params)
-    json_response(@armor, :created)
+    callback = lambda do |armor|
+      json_response(armor, :created)
+    end
+
+    ArmorCreateUseCase.call(armor_params, callback, repo)
   end
 
-  def todo_params
+  def armor_params
     params.permit(:name, :price, :defense_points, :durability)
   end
 
+  def repo
+    @repo ||= ArmorRepository.new
+  end
 end
