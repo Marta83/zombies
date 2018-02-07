@@ -7,7 +7,6 @@ class CreateUseCase
   def call
     entity = @repository.new_entity(attrs)
 
-    @repository.save(entity)
     @callback.call(entity)
   end
 

@@ -8,15 +8,13 @@ RSpec.describe 'Zombie armors API', type: :request do
     let(:invalid_armor_attributes) { { :zombie_id => zombie.id, :armor_id => 0 } }
 
     context 'when the request is valid' do
-      before { put zombie_armor_path(valid_attributes )}
 
       it 'creates a zombie' do
+        put zombie_armor_path(valid_attributes)
         expect(json['zombie_id']).to eq(zombie.id)
-      end
-
-      it 'returns status code 201' do
         expect(response).to have_http_status(201)
       end
+
     end
 
     context 'when the request is invalid' do
