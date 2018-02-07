@@ -5,3 +5,4 @@ require_relative 'application'
 Rails.application.initialize!
 
 Repository.register(:zombie, ZombieArRepository.new)
+Repository.register(:armor, ArmorArRepository.new)

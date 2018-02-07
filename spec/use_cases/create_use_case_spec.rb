@@ -29,7 +29,7 @@ RSpec.describe 'Create use case' do
   end
 
   describe 'Create a Armor' do
-    let(:repository){ArmorRepository.new}
+    let(:repository){Repository.for(:armor)}
 
     context "Valid attributes" do
       let(:attributes) { { name: 'Armor name',

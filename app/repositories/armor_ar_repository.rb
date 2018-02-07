@@ -1,4 +1,4 @@
-class ArmorRepository
+class ArmorArRepository
   def all
     Armor.all
   end

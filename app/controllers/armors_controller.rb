@@ -13,6 +13,6 @@ class ArmorsController < ApplicationController
   end
 
   def repo
-    @repo ||= ArmorRepository.new
+    @repo ||= Repository.for(:armor)
   end
 end
