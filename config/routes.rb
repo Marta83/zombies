@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   end
 
   resources :armors, only: [:create, :destroy]
-  resources :weapon, only: [:create, :destroy]
+  resources :weapons, only: [:create, :destroy]
 end
