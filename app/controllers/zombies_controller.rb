@@ -5,7 +5,7 @@ class ZombiesController < ApplicationController
       json_response(zombie, :created)
     end
 
-    ZombieCreateUseCase.call(zombie_params, callback, repo)
+    CreateUseCase.call(zombie_params, callback, repo)
   end
 
   def zombie_params

@@ -5,7 +5,7 @@ class ArmorsController < ApplicationController
       json_response(armor, :created)
     end
 
-    ArmorCreateUseCase.call(armor_params, callback, repo)
+    CreateUseCase.call(armor_params, callback, repo)
   end
 
   def armor_params

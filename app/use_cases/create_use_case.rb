@@ -1,14 +1,14 @@
 
-class ZombieCreateUseCase
+class CreateUseCase
   def self.call(attrs, callback, repository)
     new(attrs, callback, repository).call
   end
 
   def call
-    zombie = @repository.new_entity(attrs)
+    entity = @repository.new_entity(attrs)
 
-    @repository.save(zombie)
-    @callback.call(zombie)
+    @repository.save(entity)
+    @callback.call(entity)
   end
 
   private
