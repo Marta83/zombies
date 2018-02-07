@@ -13,6 +13,6 @@ class WeaponsController < ApplicationController
   end
 
   def repo
-    @repo ||= WeaponRepository.new
+    @repo ||= Repository.for(:weapon)
   end
 end

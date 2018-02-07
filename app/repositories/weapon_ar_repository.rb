@@ -1,4 +1,4 @@
-class WeaponRepository
+class WeaponArRepository
   def all
     Weapon.all
   end

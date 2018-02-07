@@ -6,3 +6,4 @@ Rails.application.initialize!
 
 Repository.register(:zombie, ZombieArRepository.new)
 Repository.register(:armor, ArmorArRepository.new)
+Repository.register(:weapon, WeaponArRepository.new)

@@ -2,10 +2,10 @@ RSpec.describe 'Create use case' do
   subject { CreateUseCase.call(attributes, callback, repository) }
 
   let(:callback) { lambda do |entity| return entity end}
+  let(:repository){Repository.for(entity)}
 
   describe 'Create a zombie' do
-    let(:repository){Repository.for(:zombie)
-}
+    let(:entity){:zombie}
 
     context "Valid attributes" do
       let(:attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week  } }
@@ -29,7 +29,7 @@ RSpec.describe 'Create use case' do
   end
 
   describe 'Create a Armor' do
-    let(:repository){Repository.for(:armor)}
+    let(:entity){:armor}
 
     context "Valid attributes" do
       let(:attributes) { { name: 'Armor name',
@@ -56,7 +56,7 @@ RSpec.describe 'Create use case' do
   end
 
   describe 'Create a Weapon' do
-    let(:repository){WeaponRepository.new}
+    let(:entity){:weapon}
 
     context "Valid attributes" do
       let(:attributes) { { name: 'Weapon name',
