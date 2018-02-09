@@ -5,8 +5,8 @@ class ZombiesController < ApplicationController
       json_response(zombie, :created)
     end
 
-    error = lambda do |zombie|
-      json_response(zombie, 422)
+    error = lambda do |error|
+      json_response(error, :unprocessable_entity)
     end
 
     CreateUseCase.call(zombie_params, repo, {success: success, failure: error})

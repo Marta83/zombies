@@ -5,8 +5,8 @@ class ArmorsController < ApplicationController
       json_response(armor, :created)
     end
 
-    error = lambda do |armor|
-      json_response(armor, 422)
+    error = lambda do |error|
+      json_response(error, :unprocessable_entity)
     end
 
     CreateUseCase.call(armor_params, repo, {success: success, failure: error} )

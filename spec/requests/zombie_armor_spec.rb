@@ -32,13 +32,13 @@ RSpec.describe 'Zombie armors API', type: :request do
       it 'returns a validation failure message' do
         put zombie_armor_path(invalid_armor_attributes)
         expect(response.body)
-        .to match(/Validation failed: Armor must exist/)
+        .to match(/[\"Armor must exist\"]/)
       end
 
       it 'returns a validation failure message' do
         put zombie_armor_path(invalid_zombie_attributes)
         expect(response.body)
-        .to match(/Validation failed: Zombie must exist/)
+        .to match(/[\"Zombie must exist\"]/)
       end
     end
     end

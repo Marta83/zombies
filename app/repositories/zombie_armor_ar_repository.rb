@@ -1,4 +1,5 @@
-class ZombieArmorArRepository
+class ZombieArmorArRepository < ArRepository
+
   def all
     ZombieArmor.all
   end
@@ -8,7 +9,7 @@ class ZombieArmorArRepository
   end
 
   def new_entity(attrs = nil)
-    ZombieArmor.create!(attrs)
+    ZombieArmor.new(attrs)
   end
 
   def save(zombie_armor)

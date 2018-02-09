@@ -34,13 +34,13 @@ RSpec.describe 'Zombie weapons API', type: :request do
       it 'returns a validation failure message' do
         put zombie_weapon_path(invalid_weapon_attributes)
         expect(response.body)
-        .to match(/Validation failed: Weapon must exist/)
+        .to match(/[\"Weapon must exist\"]/)
       end
 
       it 'returns a validation failure message' do
         put zombie_weapon_path(invalid_zombie_attributes)
         expect(response.body)
-        .to match(/Validation failed: Zombie must exist/)
+        .to match(/[\"Zombie must exist\"]/)
       end
     end
     end
