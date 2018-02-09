@@ -1,6 +1,6 @@
 RSpec.describe 'Create use case' do
 
-  describe 'Create a zombie' do
+  describe 'Create a entity' do
 
     classes = {:zombie => Zombie, :armor => Armor, :weapon => Weapon}
     entities = {:zombie =>  {name: 'Zombie name', turn_date: DateTime.now - 1.week  },
