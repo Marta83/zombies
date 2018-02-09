@@ -1,11 +1,15 @@
 class ZombiesController < ApplicationController
 
   def create
-    callback = lambda do |zombie|
+    success = lambda do |zombie|
       json_response(zombie, :created)
     end
 
-    CreateUseCase.call(zombie_params, callback, repo)
+    error = lambda do |zombie|
+      json_response(zombie, 422)
+    end
+
+    CreateUseCase.call(zombie_params, repo, {success: success, failure: error})
   end
 
   def zombie_params

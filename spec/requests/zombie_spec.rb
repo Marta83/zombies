@@ -24,7 +24,7 @@ RSpec.describe 'Zombies API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-        .to match(/Validation failed: Turn date can't be blank/)
+        .to match(/[\"Turn date can't be blank\"]/)
       end
     end
     end

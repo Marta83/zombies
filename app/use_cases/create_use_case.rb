@@ -1,20 +1,24 @@
 
 class CreateUseCase
-  def self.call(attrs, callback, repository)
-    new(attrs, callback, repository).call
+  def self.call(attrs, repository, callbacks)
+    new(attrs, repository, callbacks).call
   end
 
   def call
     entity = @repository.new_entity(attrs)
 
-    @callback.call(entity)
+    if @repository.save(entity)
+      @callbacks[:success].call(entity)
+    else
+      @callbacks[:failure].call(@repository.errors(entity))
+    end
   end
 
   private
 
-  def initialize(attrs, callback, repository)
+  def initialize(attrs, repository, callbacks)
     @attrs = attrs
-    @callback = callback
+    @callbacks = callbacks
     @repository = repository
   end
 

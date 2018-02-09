@@ -6,13 +6,14 @@ RSpec.describe 'Create use case' do
                 :armor =>  { name: 'Armor name', price: 50, defense_points: 50, durability: 50 },
                 :weapon =>  { name: 'Weapon name', price: 50, attack_points: 50, durability: 50}}
 
-    callback = lambda do |entity| return entity end
+    success = lambda do |entity| return entity end
+    error = lambda do |error| return "error" end
 
     entities.each do |key, data|
       repository = Repository.for(key)
 
       context "Valid attributes" do
-        let(:subject) { CreateUseCase.call(data , callback, repository) }
+        let(:subject) { CreateUseCase.call(data , repository, {success: success, failure: error}) }
 
         it 'should call without errors' do
           expect { subject }.to_not raise_error
@@ -24,10 +25,10 @@ RSpec.describe 'Create use case' do
       end
 
       context "Invalid attributes" do
-        let(:subject_invalid) { CreateUseCase.call({ name: data[:name] } , callback, repository) }
+        let(:subject_invalid) { CreateUseCase.call({ name: data[:name] } , repository, {success: success, failure: error}) }
 
         it 'should call without errors' do
-          expect { subject_invalid }.to raise_error(ActiveRecord::RecordInvalid)
+          expect( subject_invalid ).to eq("error")
         end
       end
     end

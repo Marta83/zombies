@@ -27,7 +27,7 @@ RSpec.describe 'Weapons API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-        .to match(/Validation failed: Price can't be blank, Attack points can't be blank, Durability can't be blank/)
+        .to match(/[\"Price can't be blank\",\"Attack points can't be blank\",\"Durability can't be blank\"]/)
       end
     end
     end

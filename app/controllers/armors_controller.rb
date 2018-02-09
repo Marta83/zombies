@@ -1,11 +1,15 @@
 class ArmorsController < ApplicationController
 
   def create
-    callback = lambda do |armor|
+    success = lambda do |armor|
       json_response(armor, :created)
     end
 
-    CreateUseCase.call(armor_params, callback, repo)
+    error = lambda do |armor|
+      json_response(armor, 422)
+    end
+
+    CreateUseCase.call(armor_params, repo, {success: success, failure: error} )
   end
 
   def armor_params

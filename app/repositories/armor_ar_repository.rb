@@ -1,4 +1,5 @@
-class ArmorArRepository
+class ArmorArRepository < ArRepository
+
   def all
     Armor.all
   end
@@ -8,7 +9,7 @@ class ArmorArRepository
   end
 
   def new_entity(attrs = nil)
-    Armor.create!(attrs)
+    Armor.new(attrs)
   end
 
   def save(armor)

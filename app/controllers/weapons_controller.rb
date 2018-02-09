@@ -1,11 +1,15 @@
 class WeaponsController < ApplicationController
 
   def create
-    callback = lambda do |weapon|
+    success = lambda do |weapon|
       json_response(weapon, :created)
     end
 
-    CreateUseCase.call(weapon_params, callback, repo)
+    error = lambda do |errors|
+      json_response(errors, 422)
+    end
+
+    CreateUseCase.call(weapon_params, repo, {success: success, failure: error})
   end
 
   def weapon_params
