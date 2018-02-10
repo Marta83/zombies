@@ -30,6 +30,24 @@ RSpec.describe 'Weapons API', type: :request do
         .to match(/[\"Price can't be blank\",\"Attack points can't be blank\",\"Durability can't be blank\"]/)
       end
     end
+
+    context 'when the request params are invalid' do
+      let(:attributes) { { name: 'Weapon name',
+                           price: "asdasd",
+                           attack_points: 50,
+                           durability: 50} }
+
+      before { post '/weapons', params: attributes }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+        .to match(/[\"Price is not a number\"]/)
+      end
     end
+  end
 
 end
