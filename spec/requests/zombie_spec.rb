@@ -27,6 +27,21 @@ RSpec.describe 'Zombies API', type: :request do
         .to match(/[\"Turn date can't be blank\"]/)
       end
     end
+
+    context 'when the request params are invalid' do
+    let(:attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week, hit_points: "asasdas"  } }
+
+      before { post '/zombies', params: attributes }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+        .to match(/[\"Hit points is not a number\"]/)
+      end
+    end
   end
 
   describe 'PUT /zombies' do
