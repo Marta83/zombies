@@ -2,27 +2,15 @@ class ArmorsController < ApplicationController
   before_action :set_armor, only: [:update, :destroy]
 
   def create
-    success = lambda do |armor|
-      json_response(armor, :created)
-    end
+    callbacks = callbacks_response(:created, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    CreateUseCase.call(armor_params, repo, {success: success, failure: error} )
+    CreateUseCase.call(armor_params, repo, callbacks )
   end
 
   def update
-    success = lambda do |armor|
-      json_response(armor, :ok)
-    end
+    callbacks = callbacks_response(:ok, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    UpdateUseCase.call(@armor, armor_params_update, repo, {success: success, failure: error})
+    UpdateUseCase.call(@armor, armor_params_update, repo, callbacks)
   end
 
   private

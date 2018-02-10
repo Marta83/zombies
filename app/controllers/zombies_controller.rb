@@ -2,27 +2,15 @@ class ZombiesController < ApplicationController
   before_action :set_zombie, only: [:update, :destroy]
 
   def create
-    success = lambda do |zombie|
-      json_response(zombie, :created)
-    end
+    callbacks = callbacks_response(:created, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    CreateUseCase.call(zombie_params, repo, {success: success, failure: error})
+    CreateUseCase.call(zombie_params, repo, callbacks)
   end
 
   def update
-    success = lambda do |zombie|
-      json_response(zombie, :ok)
-    end
+    callbacks = callbacks_response(:ok, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    UpdateUseCase.call(@zombie, zombie_params_update, repo, {success: success, failure: error})
+    UpdateUseCase.call(@zombie, zombie_params_update, repo, callbacks)
   end
 
   private

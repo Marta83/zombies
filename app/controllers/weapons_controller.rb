@@ -2,27 +2,15 @@ class WeaponsController < ApplicationController
   before_action :set_weapon, only: [:update, :destroy]
 
   def create
-    success = lambda do |weapon|
-      json_response(weapon, :created)
-    end
+    callbacks = callbacks_response(:created, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    CreateUseCase.call(weapon_params, repo, {success: success, failure: error})
+    CreateUseCase.call(weapon_params, repo, callbacks)
   end
 
   def update
-    success = lambda do |weapon|
-      json_response(weapon, :ok)
-    end
+    callbacks = callbacks_response(:ok, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    UpdateUseCase.call(@weapon, weapon_params_update, repo, {success: success, failure: error})
+    UpdateUseCase.call(@weapon, weapon_params_update, repo, callbacks)
   end
 
   private

@@ -1,15 +1,9 @@
 class ZombieWeaponsController < ApplicationController
 
   def update
-    success = lambda do |zombie_weapon|
-      json_response(zombie_weapon, :created)
-    end
+    callbacks = callbacks_response(:created, :unprocessable_entity)
 
-    error = lambda do |error|
-      json_response(error, :unprocessable_entity)
-    end
-
-    EquipUseCase.call(zombie_weapon_params, repo, {success: success, failure: error})
+    EquipUseCase.call(zombie_weapon_params, repo, callbacks)
 
   end
 
