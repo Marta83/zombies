@@ -6,6 +6,9 @@ class WeaponArRepository < ArRepository
 
   def find(id)
     Weapon.find(id)
+
+  rescue ActiveRecord::RecordNotFound => error
+    raise Repository::WeaponNotFound, error.message
   end
 
   def new_entity(attrs = nil)

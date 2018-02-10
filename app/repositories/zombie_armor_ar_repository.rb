@@ -6,6 +6,10 @@ class ZombieArmorArRepository < ArRepository
 
   def find(id)
     ZombieArmor.find(id)
+
+    rescue ActiveRecord::RecordNotFound => error
+          raise Repository::ZombieArmorNotFound, error.message
+
   end
 
   def new_entity(attrs = nil)

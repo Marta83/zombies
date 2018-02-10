@@ -6,6 +6,9 @@ class ArmorArRepository < ArRepository
 
   def find(id)
     Armor.find(id)
+
+    rescue ActiveRecord::RecordNotFound => error
+      raise Repository::ArmorNotFound, error.message
   end
 
   def new_entity(attrs = nil)
