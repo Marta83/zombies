@@ -25,6 +25,8 @@ class ZombiesController < ApplicationController
     UpdateUseCase.call(@zombie, zombie_params_update, repo, {success: success, failure: error})
   end
 
+  private
+
   def zombie_params_update
     params.permit(:id, :name, :turn_date, :hit_points, :brains_eaten, :turn_date)
   end
@@ -32,8 +34,6 @@ class ZombiesController < ApplicationController
   def zombie_params
     params.permit(:name, :turn_date, :hit_points, :brains_eaten, :turn_date)
   end
-
-  private
 
   def repo
     @repo ||= Repository.for(:zombie)

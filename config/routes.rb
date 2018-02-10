@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   end
 
-  resources :armors, only: [:create, :destroy]
-  resources :weapons, only: [:create, :destroy]
+  resources :armors, only: [:create, :update,  :destroy]
+  resources :weapons, only: [:create, :update,  :destroy]
 end

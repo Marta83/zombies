@@ -53,7 +53,7 @@ RSpec.describe 'Zombies API', type: :request do
         put zombie_path(valid_attributes)
       }
 
-      it 'creates a zombie' do
+      it 'update zombie name' do
         expect(json['name']).to eq('Zombie name changed')
       end
 

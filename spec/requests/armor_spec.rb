@@ -50,4 +50,54 @@ RSpec.describe 'Armors API', type: :request do
     end
   end
 
+  describe 'PUT /armors' do
+
+    context 'when the request is valid' do
+      before(:all) {
+        armor = create(:armor)
+        valid_attributes = {  id: armor.id, name: 'Armor name changed'}
+        put armor_path(valid_attributes)
+      }
+
+      it 'update armor name' do
+        expect(json['name']).to eq('Armor name changed')
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before(:all) {
+        attributes = {id: 1, name: 'Armor name changed'}
+        put armor_path(attributes)
+      }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body).to eq("Armor not found")
+      end
+    end
+
+    context 'when the request params ar not invalid' do
+      before(:all) {
+        armor = create(:armor)
+        attributes = {id: armor.id, name: 'Zombie name changed', defense_points: "asdasd"}
+        put armor_path(attributes)
+      }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body).to eq("[\"Defense points is not a number\"]")
+      end
+    end
+
+  end
 end
