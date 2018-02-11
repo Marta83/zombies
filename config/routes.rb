@@ -13,3 +13,11 @@ Rails.application.routes.draw do
   get '/searches', to: 'searches#index'
   get '/semantic_searches', to: 'semantic_searches#index'
 end
+
+
+Repository.register(:zombie, ZombieArRepository.new)
+Repository.register(:armor, ArmorArRepository.new)
+Repository.register(:weapon, WeaponArRepository.new)
+Repository.register(:zombie_armor, ZombieArmorArRepository.new)
+Repository.register(:zombie_weapon, ZombieWeaponArRepository.new)
+

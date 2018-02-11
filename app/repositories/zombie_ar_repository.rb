@@ -22,4 +22,13 @@ class ZombieArRepository < ArRepository
   def delete(zombie)
     zombie.destroy
   end
+
+  def search(query)
+    zombies = Zombie.search(query)
+  end
+
+  def filter(attrs)
+    zombies = Zombie.filter(attrs)
+  end
+
 end

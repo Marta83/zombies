@@ -9,8 +9,8 @@ FactoryBot.define do
       after :create do |zombie|
         armor = create :armor
         weapon = create :weapon
-        create_list :zombie_armor, 3, zombie: zombie, armor: armor
-        create_list :zombie_weapon, 3, zombie: zombie, weapon: weapon
+        create :zombie_armor,  zombie: zombie, armor: armor
+        create :zombie_weapon,  zombie: zombie, weapon: weapon
         Zombie.reindex
         sleep 3
       end

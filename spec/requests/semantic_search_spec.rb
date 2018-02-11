@@ -2,6 +2,7 @@ RSpec.describe 'Semantic Search API', type: :request do
 
   before(:all){
     @zombie = create(:zombie_equiped)
+    @zombie2 = create(:zombie_equiped)
   }
 
   describe 'GET /semantic_search' do

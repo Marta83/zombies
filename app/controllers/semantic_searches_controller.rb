@@ -2,10 +2,9 @@ class SemanticSearchesController < ApplicationController
 
   def index
 
-    query = search_params['q']
-    zombies = Zombie.search(query)
+    callbacks = callbacks_response(:ok, :unprocessable_entity)
 
-    json_response(zombies, :ok)
+    SemanticSearchUseCase.call(search_params, repo, callbacks)
   end
 
 
@@ -14,6 +13,11 @@ class SemanticSearchesController < ApplicationController
   def search_params
     params.required(:q)
   end
+
+  def repo
+    @repo ||= Repository.for(:zombie)
+  end
+
 
   rescue_from ActionController::ParameterMissing do
       json_error_response('Parameter not found', :not_found)
