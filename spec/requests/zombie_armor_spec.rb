@@ -1,4 +1,3 @@
-require "rails_helper"
 RSpec.describe 'Zombie armors API', type: :request do
   let!(:armor) { create(:armor) }
   let!(:zombie) { create(:zombie) }
