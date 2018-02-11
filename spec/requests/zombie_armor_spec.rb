@@ -1,3 +1,4 @@
+require "rails_helper"
 RSpec.describe 'Zombie armors API', type: :request do
   let!(:armor) { create(:armor) }
   let!(:zombie) { create(:zombie) }
@@ -43,4 +44,34 @@ RSpec.describe 'Zombie armors API', type: :request do
     end
     end
 
+  describe 'Delete /zombie_armors' do
+
+    context 'when the request is valid' do
+
+      it 'deleted zombie armor' do
+        zombie = create(:zombie)
+        armor = create(:armor)
+        zombie_armor = create(:zombie_armor, zombie: zombie, armor: armor)
+        valid_attributes = {zombie_id: zombie.id, armor_id: armor.id}
+
+        expect{
+          delete "/zombies/#{zombie.id}/armors/#{armor.id}"
+        }.to change(ZombieArmor, :count).by(-1)
+      end
+
+    end
+
+    context 'when the request is invalid' do
+
+      it 'Zombie armor is not deleted' do
+        attributes = build_stubbed(:zombie_armor)
+
+        expect{
+          delete "/zombies/#{attributes.zombie_id}/armors/#{attributes.armor_id}"
+        }.to_not change(ZombieArmor, :count)
+        expect(response).to have_http_status(404)
+      end
+    end
+
+  end
 end

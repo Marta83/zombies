@@ -4,8 +4,8 @@ class ZombieArmorArRepository < ArRepository
     ZombieArmor.all
   end
 
-  def find(id)
-    ZombieArmor.find(id)
+  def find(zombie_id, armor_id)
+    ZombieArmor.find_by!({zombie_id: zombie_id, armor_id: armor_id} )
 
     rescue ActiveRecord::RecordNotFound => error
           raise Repository::ZombieArmorNotFound, error.message

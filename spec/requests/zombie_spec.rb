@@ -1,4 +1,3 @@
-require "rails_helper"
 RSpec.describe 'Zombies API', type: :request do
 
   before(:all) {

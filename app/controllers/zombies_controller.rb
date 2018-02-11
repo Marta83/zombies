@@ -25,10 +25,14 @@ class ZombiesController < ApplicationController
     callbacks = {success: success, failure: error}
 
 
-    DestroyUseCase.call(@zombie, zombie_params_update, repo, callbacks)
+    DestroyUseCase.call(@zombie, zombie_params_delete, repo, callbacks)
   end
 
   private
+
+  def zombie_params_delete
+    params.require(:id)
+  end
 
   def zombie_params_update
     params.permit(:id, :name, :turn_date, :hit_points, :brains_eaten, :turn_date)
