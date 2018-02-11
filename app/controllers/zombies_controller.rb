@@ -13,6 +13,21 @@ class ZombiesController < ApplicationController
     UpdateUseCase.call(@zombie, zombie_params_update, repo, callbacks)
   end
 
+  def destroy
+
+    success = lambda do
+      json_error_response("Zombie Deleted", :ok)
+    end
+    error = lambda do |error|
+      json_error_response(error, :unprocessable_entity)
+    end
+
+    callbacks = {success: success, failure: error}
+
+
+    DestroyUseCase.call(@zombie, zombie_params_update, repo, callbacks)
+  end
+
   private
 
   def zombie_params_update

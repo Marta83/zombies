@@ -6,8 +6,8 @@ class Zombie < ApplicationRecord
   validates_numericality_of :hit_points, :brains_eaten, :speed
 
 
-  has_many :zombie_armors
-  has_many :zombie_weapons
+  has_many :zombie_armors, :dependent => :delete_all
+  has_many :zombie_weapons, :dependent => :delete_all
   has_many :armors, through: :zombie_armors
   has_many :weapons, through: :zombie_weapons
   after_touch :index!

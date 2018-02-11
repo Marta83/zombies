@@ -1,3 +1,4 @@
+require "rails_helper"
 RSpec.describe 'Zombies API', type: :request do
 
   before(:all) {
@@ -96,6 +97,45 @@ RSpec.describe 'Zombies API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body).to eq("{\"error\":[\"Hit points is not a number\"]}")
+      end
+    end
+
+  end
+
+  describe 'Delete /zombies' do
+
+    context 'when the request is valid' do
+
+      it 'deleted zombie name' do
+        zombie = create(:zombie)
+        valid_attributes = {id: zombie.id}
+
+        expect{
+          delete zombie_path(valid_attributes)
+        }.to change(Zombie, :count).by(-1)
+      end
+
+      it 'dependent destroy' do
+        zombie = create(:zombie_equiped)
+        valid_attributes = {id: zombie.id}
+
+        expect{
+          delete zombie_path(valid_attributes)
+        }.to change(ZombieArmor, :count).by(-1)
+        .and change(ZombieWeapon, :count).by(-1)
+
+      end
+    end
+
+    context 'when the request is invalid' do
+
+      it 'Zombie is not deleted' do
+        attributes = build_stubbed(:zombie)
+
+        expect{
+          delete zombie_path(attributes)
+        }.to_not change(Zombie, :count)
+        expect(response).to have_http_status(404)
       end
     end
 
