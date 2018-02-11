@@ -1,13 +1,17 @@
 RSpec.describe 'Zombies API', type: :request do
 
-  describe 'POST /zombies' do
-    let(:valid_attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week  } }
+  before(:all) {
+    @attributes = attributes_for(:zombie)
+  }
 
+  describe 'POST /zombies' do
     context 'when the request is valid' do
-      before { post '/zombies', params: valid_attributes }
+      before(:all) {
+        post '/zombies', params: @attributes
+      }
 
       it 'creates a zombie' do
-        expect(json['name']).to eq('Zombie name')
+        expect(json['name']).to eq(@attributes[:name])
       end
 
       it 'returns status code 201' do
@@ -16,7 +20,7 @@ RSpec.describe 'Zombies API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/zombies', params: { name: 'Zombie name' } }
+      before { post '/zombies', params: { name: @attributes[:name] } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -29,9 +33,11 @@ RSpec.describe 'Zombies API', type: :request do
     end
 
     context 'when the request params are invalid' do
-    let(:attributes) { { name: 'Zombie name', turn_date: DateTime.now - 1.week, hit_points: "asasdas"  } }
 
-      before { post '/zombies', params: attributes }
+      before(:all) {
+        attributes = attributes_for(:zombie, hit_points: 'asdasdasd')
+        post '/zombies', params: attributes
+      }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -64,7 +70,7 @@ RSpec.describe 'Zombies API', type: :request do
 
     context 'when the request is invalid' do
       before(:all) {
-        attributes = {id: 1, name: 'Zombie name changed'}
+        attributes = build_stubbed(:zombie)
         put zombie_path(attributes)
       }
 
