@@ -32,6 +32,6 @@ class ArmorsController < ApplicationController
   end
 
   rescue_from Repository::ArmorNotFound do
-      json_response("Armor not found", :not_found)
+      json_error_response("Armor not found", :not_found)
   end
 end

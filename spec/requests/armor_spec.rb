@@ -79,7 +79,7 @@ RSpec.describe 'Armors API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to eq("Armor not found")
+        expect(response.body).to eq("{\"error\":\"Armor not found\"}")
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe 'Armors API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to eq("[\"Defense points is not a number\"]")
+        expect(response.body).to eq("{\"error\":[\"Defense points is not a number\"]}")
       end
     end
 

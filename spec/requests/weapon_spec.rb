@@ -70,7 +70,7 @@ RSpec.describe 'Weapons API', type: :request do
 
     context 'when the request is invalid' do
       before(:all) {
-        attributes = {id: 1, name: 'Weapon name changed'}
+        attributes = build_stubbed(:weapon)
         put weapon_path(attributes)
       }
 
@@ -79,7 +79,7 @@ RSpec.describe 'Weapons API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to eq("Weapon not found")
+        expect(response.body).to eq("{\"error\":\"Weapon not found\"}")
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe 'Weapons API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to eq("[\"Attack points is not a number\"]")
+        expect(response.body).to eq("{\"error\":[\"Attack points is not a number\"]}")
       end
     end
 

@@ -32,6 +32,6 @@ class ZombiesController < ApplicationController
   end
 
   rescue_from Repository::ZombieNotFound do
-      json_response("Zombie not found", :not_found)
+      json_error_response("Zombie not found", :not_found)
   end
 end

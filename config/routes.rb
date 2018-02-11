@@ -8,4 +8,8 @@ Rails.application.routes.draw do
 
   resources :armors, only: [:create, :update,  :destroy]
   resources :weapons, only: [:create, :update,  :destroy]
+
+
+  get '/searches', to: 'searches#index'
+  get '/semantic_searches', to: 'semantic_searches#index'
 end

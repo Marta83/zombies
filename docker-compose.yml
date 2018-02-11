@@ -12,6 +12,7 @@ services:
       API_DB_DEV_NAME: coding-challenge-api-dev
       API_DB_TEST_NAME: coding-challenge-api-test
       API_DB_PASSWORD: M9S8TsR7z7SG6Y
+      ELASTICSEARCH_URL: elasticsearch:9200
     ports:
       - "3000:3000"
     links:
@@ -28,26 +29,3 @@ services:
       MYSQL_DATABASE: coding-challenge-api
       MYSQL_ROOT_PASSWORD: M9S8TsR7z7SG6Y
     command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci "
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
-    container_name: elasticsearch
-    environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - esdata1:/usr/share/elasticsearch/data
-    ports:
-      - "9201:9201"
-    networks:
-      - esnet
-volumes:
-  esdata1:
-    driver: local
-networks:
-  esnet:
-

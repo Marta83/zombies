@@ -73,7 +73,7 @@ RSpec.describe 'Zombies API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to eq("Zombie not found")
+        expect(response.body).to eq("{\"error\":\"Zombie not found\"}")
       end
     end
 
@@ -89,7 +89,7 @@ RSpec.describe 'Zombies API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to eq("[\"Hit points is not a number\"]")
+        expect(response.body).to eq("{\"error\":[\"Hit points is not a number\"]}")
       end
     end
 

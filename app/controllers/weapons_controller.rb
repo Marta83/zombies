@@ -32,6 +32,6 @@ class WeaponsController < ApplicationController
   end
 
   rescue_from Repository::WeaponNotFound do
-      json_response("Weapon not found", :not_found)
+      json_error_response("Weapon not found", :not_found)
   end
 end
