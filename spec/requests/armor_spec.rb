@@ -1,16 +1,18 @@
 RSpec.describe 'Armors API', type: :request do
 
+  before(:all) {
+    @attributes = attributes_for(:armor)
+  }
+
   describe 'POST /armors' do
-    let(:valid_attributes) { { name: 'Armor name',
-                               price: 50,
-                               defense_points: 50,
-                               durability: 50} }
 
     context 'when the request is valid' do
-      before { post '/armors', params: valid_attributes }
+      before(:all) {
+        post '/armors', params: @attributes
+      }
 
       it 'creates a armor' do
-        expect(json['name']).to eq('Armor name')
+        expect(json['name']).to eq(@attributes[:name])
       end
 
       it 'returns status code 201' do
@@ -19,7 +21,7 @@ RSpec.describe 'Armors API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/armors', params: { name: 'Armor name' } }
+      before { post '/armors', params: { name: @attributes[:name] } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -32,12 +34,10 @@ RSpec.describe 'Armors API', type: :request do
     end
 
     context 'when the request params are invalid' do
-      let(:attributes) { { name: 'Armor name',
-                           price: "asdasd",
-                           defense_points: 50,
-                           durability: 50} }
-
-      before { post '/armors', params: attributes }
+      before(:all) {
+        attributes = attributes_for(:armor, price: 'asdasdasd')
+        post '/armors', params: attributes
+      }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -70,7 +70,7 @@ RSpec.describe 'Armors API', type: :request do
 
     context 'when the request is invalid' do
       before(:all) {
-        attributes = {id: 1, name: 'Armor name changed'}
+        attributes = build_stubbed(:weapon)
         put armor_path(attributes)
       }
 
