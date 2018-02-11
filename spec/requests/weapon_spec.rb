@@ -1,16 +1,17 @@
 RSpec.describe 'Weapons API', type: :request do
 
   describe 'POST /weapons' do
-    let(:valid_attributes) { { name: 'Weapon name',
-                               price: 50,
-                               attack_points: 50,
-                               durability: 50} }
+    before(:all) {
+      @attributes = attributes_for(:weapon)
+    }
 
     context 'when the request is valid' do
-      before { post '/weapons', params: valid_attributes }
+      before(:all) {
+        post '/weapons', params: @attributes
+      }
 
       it 'creates a weapon' do
-        expect(json['name']).to eq('Weapon name')
+        expect(json['name']).to eq(@attributes[:name])
       end
 
       it 'returns status code 201' do
@@ -19,7 +20,7 @@ RSpec.describe 'Weapons API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/weapons', params: { name: 'Weapon name' } }
+      before { post '/weapons', params: { name: @attributes[:name] } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -32,12 +33,11 @@ RSpec.describe 'Weapons API', type: :request do
     end
 
     context 'when the request params are invalid' do
-      let(:attributes) { { name: 'Weapon name',
-                           price: "asdasd",
-                           attack_points: 50,
-                           durability: 50} }
 
-      before { post '/weapons', params: attributes }
+      before(:all) {
+        attributes = attributes_for(:weapon, price: 'asdasdasd')
+        post '/weapons', params: attributes
+      }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -55,7 +55,7 @@ RSpec.describe 'Weapons API', type: :request do
     context 'when the request is valid' do
       before(:all) {
         weapon = create(:weapon)
-        valid_attributes = {  id: weapon.id, name: 'Weapon name changed'}
+        valid_attributes = {id: weapon.id, name: 'Weapon name changed'}
         put weapon_path(valid_attributes)
       }
 
