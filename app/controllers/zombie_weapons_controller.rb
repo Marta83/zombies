@@ -9,15 +9,7 @@ class ZombieWeaponsController < ApplicationController
   end
   def destroy
 
-    success = lambda do
-      json_error_response("Zombie Weapon unequiped", :ok)
-    end
-    error = lambda do |error|
-      json_error_response(error, :unprocessable_entity)
-    end
-
-    callbacks = {success: success, failure: error}
-
+    callbacks = callbacks_message_response("Zombie Weapon unequiped",:ok, :unprocessable_entity)
 
     DestroyUseCase.call(@zombie_weapon, zombie_weapon_params_delete, repo, callbacks)
   end
