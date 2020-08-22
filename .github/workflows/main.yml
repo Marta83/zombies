@@ -1,15 +1,12 @@
-on: [push]
-
+name: funny comment 
 jobs:
-  hello_world_job:
+  example:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: Marta83/hello-world-javascript-action@v1
-      with:
-        who-to-greet: 'Orugrita'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Create comment
+        uses: Marta83/funny-comment-action@v1
+        id: comment
+        with:
+          comment_type: all
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
