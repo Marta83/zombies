@@ -9,7 +9,7 @@ jobs:
     if: github.event_name == 'pull_request' || github.event_name == 'issues'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.0.0
+      - uses: Marta83/funny-comment-action@v1
       - id: prComment
         uses: ./
         with:
