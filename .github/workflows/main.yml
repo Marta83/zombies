@@ -1,4 +1,9 @@
 name: funny comment 
+on:
+  pull_request:
+  issues: 
+    types: [opened]
+
 jobs:
   example:
     runs-on: ubuntu-latest
